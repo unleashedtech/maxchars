@@ -1,0 +1,11 @@
+MaxChars Plugin for jQuery
+Version 1.0.0
+http://www.unleashed-technologies.com/
+
+Copyright 2010, Unleashed Technologies, LLC
+Released under the MIT License.
+http://www.unleashed-technologies.com/projects/maxchars/MIT-LICENSE.txt
+
+maxchars is a jQuery plugin for easily adding/enforcing character limits on input elements with a friendly UI
+
+For information about this plugin, please visit http://www.unleashed-technologies.com/blog/2010/11/05/jquery-maxchars-plugin

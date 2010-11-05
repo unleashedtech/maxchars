@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<title>jQuery maxchars Plugin Demo</title>
+		<script src="jquery.js"></script>
+		<script src="jquery.maxchars.js"></script>
+	</head>
+	
+	<body>
+		<div id="top">
+			<h1>jQuery maxchars Plugin Demo</h1>
+			<p>
+				Source: <a href="http://www.github.com/unleashtech/maxchars">http://www.github.com/unleashtech/maxchars</a><br>
+				Documentation: <a href="http://www.unleashed-technologies.com/blog/2010/11/05/jquery-maxchars-plugin">http://www.unleashed-technologies.com/blog/2010/11/05/jquery-maxchars-plugin</a>
+			</p>
+			<p>Select which elements to manipulate, set some options, and choose an action.</p>
+		</div>
+		<div id="left">
+			<fieldset>
+				<legend>Tinker with the script</legend>
+				<form id="tinker">
+					<label for="inputtouse">Elements to manipulate:</label>
+					<select id="inputtouse" name="inputtouse" multiple="multiple" size="2">
+						<option value="test1" selected="selected">the textarea</option>
+						<option value="test2">the input box</option>
+					</select>
+					
+					<label for="maxchars">Maximum characters allowed:</label>
+					<input id="maxchars" name="maxchars" value="20">
+					
+					<label for="showExtraChars">Allow extra characters to be displayed?</label>
+					<input id="showExtraChars" type="checkbox" value="showExtraChars" />
+					
+					<label>Perform action:</label>
+					<button id="init" name="go" value="init">init</button>
+					<button id="destroy" name="go" value="destroy">destroy</button>
+					<button id="isvalid" name="go" value="isvalid">isvalid</button>
+				</form>
+			</fieldset>
+		</div>
+		<div id="right">
+			<textarea id="test1">Here's a textarea you can play with</textarea>
+			<input id="test2" type="text" value="A shorter textbox" />
+		</div>
+		<div id="footer">
+			<p>&copy;2010 <a href="http://www.unleashed-technologies.com">Unleashed Technologies, LLC</a></p>
+		</div>
+		
+		<script>
+			$(function(){
+				$('form').submit(function(e){
+					e.preventDefault();
+					return false;
+				});
+				
+				$('button').click(function(){
+				
+					var el = [];
+					$('#inputtouse option:selected').each(function(){
+						var selector = '#' + $(this).val();
+						el.push($(selector));
+					});
+				
+					switch($(this).val())
+					{
+						case 'init':
+							$(el).maxchars({
+								maxChars: $('#maxchars').val(),
+								showExtraChars: $('#showExtraChars').is(':checked')
+							});
+							break;
+						case 'destroy':
+							$(el).maxchars('destroy');
+							break;
+						case 'isvalid':
+							alert($(el).maxchars('isvalid'));
+							break;
+					}
+				});
+			});
+		</script>
+		<style>
+			body { background:#eee; font-family:Arial, sans-serif; }
+			#top h1 { margin:0px; }
+			#top p { margin:0.5em 0 2em 0; font-size:12px; }
+			#left, #right { float:left; }
+			#test1,
+			#test2 { display:block; margin:1em; }
+			#test1 { height:75px; width:300px; }
+			#test2 { width:300px; margin-top:3em; }
+			fieldset { border:1px solid #09f; padding:1em; width:300px; }
+			label { display:block; margin-bottom:0.5em; }
+			form select, form input { margin-bottom:1em; }
+			span.maxchars-message { border:1px solid #ccc; display:block; width:280px; padding:10px; margin-left:12px; font-size:11px; color:#666; }
+			span.maxchars-over-limit { font-weight:bold; color:#f00 !important; }
+			span.maxchars-close-to-limit { color:#c66; }
+			#footer { border-top:1px solid #333; padding:0.5em; position:fixed; bottom:0; left:0; width:100%; background:#ddd; }
+			#footer p { margin:0;padding:0; font-size:12px; }
+		</style>
+	</body>
+</html>
